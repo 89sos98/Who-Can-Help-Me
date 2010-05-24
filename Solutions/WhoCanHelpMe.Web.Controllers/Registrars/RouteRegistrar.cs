@@ -25,7 +25,7 @@
     [Export(typeof(IComponentRegistrar))]
     public class RouteRegistrar : IComponentRegistrar
     {
-        private static string[] NonCmsControllers = new[] { "about", "error", "navigation", "profile", "search", "tag", "user" };
+        private static string[] NonCmsControllers = new[] { "error", "navigation", "profile", "search", "tag", "user" };
 
         /// <summary>
         /// Registers the routes into the routes collection

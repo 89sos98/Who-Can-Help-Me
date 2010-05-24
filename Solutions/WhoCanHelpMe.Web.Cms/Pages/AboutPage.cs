@@ -1,26 +1,17 @@
 namespace WhoCanHelpMe.Web.Cms.Pages
 {
-    #region Using Directives
-
     using N2;
     using N2.Details;
     using N2.Installation;
-    using N2.Integrity;
-    using WhoCanHelpMe.Web.Cms;
 
-    #endregion
-
-    /// <summary>
-    /// The home page definition.
-    /// </summary>
-    [PageDefinition("Home Page",
-        Description = "A home page template.",
+    [PageDefinition("About Page",
+        Description = "An about page template.",
         SortOrder = 440,
-        InstallerVisibility = InstallerHint.PreferredRootPage | InstallerHint.PreferredStartPage,
-        IconUrl = "~/n2/resources/icons/page_world.png")]
+        InstallerVisibility = InstallerHint.NeverRootOrStartPage,
+        IconUrl = "~/n2/resources/icons/page_word.png")]
     [WithEditableTitle("Title", 5, Focus = true, ContainerName = Tabs.Content)]
-    [RestrictParents(typeof(HomePage))]
-    public class HomePage : AbstractPage
+    [WithEditableName("Name", 10, ContainerName = Tabs.Content)]
+    public class AboutPage : AbstractPage
     {
         /// <summary>
         /// Gets or sets Heading.
@@ -30,16 +21,6 @@ namespace WhoCanHelpMe.Web.Cms.Pages
         {
             get { return (string)GetDetail("Heading"); }
             set { SetDetail("Heading", value); }
-        }
-
-        /// <summary>
-        /// Gets or sets Heading.
-        /// </summary>
-        [EditableTextBox("SubHeading", 20, ContainerName = Tabs.Content, HelpText = "Set the sub heading for the page.")]
-        public string SubHeading
-        {
-            get { return (string)GetDetail("SubHeading"); }
-            set { SetDetail("SubHeading", value); }
         }
 
         /// <summary>

@@ -6,18 +6,19 @@ namespace WhoCanHelpMe.Web.Controllers.About
     using System.Web.Mvc;
 
     using Aspects.Caching;
-
+    using Cms.Pages;
     using Domain.Contracts.Tasks;
 
     using Framework.Caching;
 
     using Mappers.Contracts;
-
+    using N2.Web;
     using Shared.ViewModels;
 
     #endregion
 
-    public class AboutController : BaseController
+    [Controls(typeof(AboutPage))]
+    public class AboutController : N2Controller<AboutPage>
     {
         private readonly IAboutPageViewModelMapper aboutPageViewModelMapper;
 
@@ -31,19 +32,19 @@ namespace WhoCanHelpMe.Web.Controllers.About
             this.aboutPageViewModelMapper = aboutPageViewModelMapper;
         }
 
-        public ActionResult Index()
+        public override ActionResult Index()
         {
             var pageViewModel = this.IndexInner();
 
             return this.View(pageViewModel);
         }
 
-        [Cached(CacheName.AdHoc)]
+        // [Cached(CacheName.AdHoc)]
         private PageViewModel IndexInner()
         {
             var developmentTeamBuzz = this.newsTasks.GetDevelopmentTeamBuzz();
 
-            return this.aboutPageViewModelMapper.MapFrom(developmentTeamBuzz);
+            return this.aboutPageViewModelMapper.MapFrom(this.CurrentItem, developmentTeamBuzz);
         }
 
         public ActionResult DemonstrateErrorHandling()

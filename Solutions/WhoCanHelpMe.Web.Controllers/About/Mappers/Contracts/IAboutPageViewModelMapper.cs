@@ -3,7 +3,7 @@
     #region Using Directives
 
     using System.Collections.Generic;
-
+    using Cms.Pages;
     using Domain;
 
     using Framework.Mapper;
@@ -12,7 +12,7 @@
 
     #endregion
 
-    public interface IAboutPageViewModelMapper : IMapper<IList<NewsItem>, AboutPageViewModel>
+    public interface IAboutPageViewModelMapper : IMapper<AboutPage, IList<NewsItem>, AboutPageViewModel>
     {
     }
 }
