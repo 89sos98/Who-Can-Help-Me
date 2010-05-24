@@ -15,6 +15,12 @@
             this.NewsItems = new List<NewsItemViewModel>();
         }
 
+        public string Heading { get; set; }
+        
+        public string SubHeading { get; set; }
+
+        public string BodyText { get; set; }
+
         public IList<NewsItemViewModel> NewsItems { get; set; }
     }
 }

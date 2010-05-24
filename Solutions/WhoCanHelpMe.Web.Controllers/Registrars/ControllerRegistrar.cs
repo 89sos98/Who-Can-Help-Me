@@ -43,7 +43,7 @@ namespace WhoCanHelpMe.Web.Controllers.Registrars
         /// </returns>
         private static bool IsController(Type type)
         {
-            return typeof(IController).IsAssignableFrom(type);
+            return typeof(BaseController).IsAssignableFrom(type);
         }
     }
 }

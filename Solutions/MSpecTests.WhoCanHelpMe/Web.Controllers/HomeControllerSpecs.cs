@@ -7,6 +7,7 @@
 
     using global::WhoCanHelpMe.Domain;
     using global::WhoCanHelpMe.Domain.Contracts.Tasks;
+    using global::WhoCanHelpMe.Web.Cms.Pages;
     using global::WhoCanHelpMe.Web.Controllers.Home;
     using global::WhoCanHelpMe.Web.Controllers.Home.Mappers.Contracts;
     using global::WhoCanHelpMe.Web.Controllers.Home.ViewModels;
@@ -37,15 +38,17 @@
     {
         static HomePageViewModel the_view_model;
         static IList<NewsItem> the_news_items;
+        static HomePage the_page;
         static ActionResult result;
 
         Establish context = () =>
             {
                 the_view_model = new HomePageViewModel();
+                the_page = new HomePage();
                 the_news_items = new List<NewsItem>();
 
                 news_tasks.Stub(nt => nt.GetProjectBuzz()).Return(the_news_items);
-                home_view_model_mapper.Stub(hvmm => hvmm.MapFrom(the_news_items)).Return(the_view_model);
+                home_view_model_mapper.Stub(hvmm => hvmm.MapFrom(the_page, the_news_items)).Return(the_view_model);
             };
         
         Because of = () => result = subject.Index();
@@ -54,7 +57,7 @@
             result.ShouldBeAView().And().ShouldUseDefaultView();
 
         It should_get_the_view_model_from_the_home_view_model_mapper =
-            () => home_view_model_mapper.AssertWasCalled(hvmm => hvmm.MapFrom(the_news_items));
+            () => home_view_model_mapper.AssertWasCalled(hvmm => hvmm.MapFrom(the_page, the_news_items));
 
         It should_pass_the_view_model_to_the_view =
             () => result.Model<HomePageViewModel>().ShouldBeTheSameAs(the_view_model);

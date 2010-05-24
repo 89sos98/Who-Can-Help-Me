@@ -2,21 +2,24 @@
 {
     #region Using Directives
 
+    using System.Collections.Generic;
     using System.Web.Mvc;
 
     using Aspects.Caching;
-
+    using Cms.Pages;
+    using Domain;
     using Domain.Contracts.Tasks;
 
     using Framework.Caching;
 
     using Mappers.Contracts;
-
+    using N2.Web;
     using Shared.ViewModels;
 
     #endregion
 
-    public class HomeController : BaseController
+    [Controls(typeof(HomePage))]
+    public class HomeController : N2Controller<HomePage>
     {
         private readonly IHomePageViewModelMapper homePageViewModelMapper;
 
@@ -30,19 +33,19 @@
             this.homePageViewModelMapper = homePageViewModelMapper;
         }
 
-        public ActionResult Index()
+        public override ActionResult Index()
         {
             var pageViewModel = this.IndexInner();
 
             return this.View(pageViewModel);
         }
 
-        [Cached(CacheName.AdHoc)]
+        // [Cached(CacheName.AdHoc)]
         private PageViewModel IndexInner()
         {
             var buzz = this.newsTasks.GetProjectBuzz();
 
-            return this.homePageViewModelMapper.MapFrom(buzz);
+            return this.homePageViewModelMapper.MapFrom(this.CurrentItem, buzz);
         }
     }
 }

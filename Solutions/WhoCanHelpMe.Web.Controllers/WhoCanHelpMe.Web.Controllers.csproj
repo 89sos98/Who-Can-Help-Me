@@ -103,6 +103,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\ReferencedAssemblies\MvcContrib\MvcContrib.TestHelper.dll</HintPath>
     </Reference>
+    <Reference Include="N2">
+      <HintPath>..\..\ReferencedAssemblies\N2CMS\N2.dll</HintPath>
+    </Reference>
+    <Reference Include="N2.Extensions">
+      <HintPath>..\..\ReferencedAssemblies\N2CMS\N2.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="NHibernate.Validator, Version=1.2.0.1004, Culture=neutral, PublicKeyToken=b5f559ae0ac4e006, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\ReferencedAssemblies\NHibernate\NHibernate.Validator.dll</HintPath>
@@ -138,6 +144,7 @@
     <Compile Include="..\..\Common\CommonAssemblyInfo.cs">
       <Link>Properties\CommonAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="N2Controller.cs" />
     <Compile Include="Shared\Mappers\Contracts\INewsItemViewModelMapper.cs" />
     <Compile Include="Shared\Mappers\NewsItemViewModelMapper.cs" />
     <Compile Include="BasePageViewModelMapper.cs" />
@@ -198,7 +205,7 @@
     <Compile Include="Profile\Mappers\ProfilePageViewModelMapper.cs" />
     <Compile Include="Search\Mappers\SearchPageViewModelMapper.cs" />
     <Compile Include="Profile\ProfileController.cs" />
-    <Compile Include="Initialisers\RouteInitialiser.cs" />
+    <Compile Include="Registrars\RouteRegistrar.cs" />
     <Compile Include="Search\SearchController.cs" />
     <Compile Include="Tag\TagController.cs" />
     <Compile Include="Shared\ViewModels\MetaDataViewModel.cs" />
@@ -222,6 +229,10 @@
       <Project>{B3CA9DAB-0279-4637-BF8E-DFAE36F7A7CB}</Project>
       <Name>WhoCanHelpMe.Framework</Name>
     </ProjectReference>
+    <ProjectReference Include="..\WhoCanHelpMe.Web.Cms\WhoCanHelpMe.Web.Cms.csproj">
+      <Project>{B13FB20A-0343-4FEB-A4D5-101BC16F6B77}</Project>
+      <Name>WhoCanHelpMe.Web.Cms</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -240,5 +251,6 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

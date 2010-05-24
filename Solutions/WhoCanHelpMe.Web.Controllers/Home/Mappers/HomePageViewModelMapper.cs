@@ -5,7 +5,7 @@
     using System.Collections.Generic;
 
     using AutoMapper;
-
+    using Cms.Pages;
     using Contracts;
 
     using Domain;
@@ -18,7 +18,7 @@
 
     #endregion
 
-    public class HomePageViewModelMapper : BasePageViewModelMapper<IList<NewsItem>, HomePageViewModel>,
+    public class HomePageViewModelMapper : BasePageViewModelMapper<HomePage, IList<NewsItem>, HomePageViewModel>,
                                            IHomePageViewModelMapper
     {
         private readonly INewsItemViewModelMapper newsItemViewModelMapper;
@@ -33,6 +33,7 @@
 
         protected override void CreateMap()
         {
+            Mapper.CreateMap<HomePage, HomePageViewModel>();
             Mapper.CreateMap<IList<NewsItem>, HomePageViewModel>().ConvertUsing(list => this.DoMapping(list));
         }
 
